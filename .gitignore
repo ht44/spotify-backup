@@ -1,0 +1,6 @@
+env.py
+.pyc
+.idea/
+__pycache__/
+library.json
+database.db
