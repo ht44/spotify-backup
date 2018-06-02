@@ -17,3 +17,4 @@ def get_album(album_id):
     result = c.execute('SELECT * FROM album WHERE id=?', t).fetchone()
     conn.close()
     return result
+

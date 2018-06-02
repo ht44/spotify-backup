@@ -6,7 +6,6 @@ def get_songs():
     conn = sqlite3.connect(os.getenv('DB_PATH'))
     c = conn.cursor()
     result = c.execute('''SELECT * FROM song''').fetchall()
-    conn.commit()
     conn.close()
     return result
 

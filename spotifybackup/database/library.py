@@ -2,7 +2,7 @@ import os
 import sqlite3
 
 
-def get():
+def get_library():
     conn = sqlite3.connect(os.getenv('DB_PATH'))
     c = conn.cursor()
     result = c.execute('''
@@ -11,7 +11,6 @@ def get():
           s.name AS song,
           al.name as album,
           GROUP_CONCAT(a.name, ', ') AS artist
-
         FROM song AS s
           JOIN album AS al
             ON s.album_id = al.id
@@ -22,7 +21,35 @@ def get():
         GROUP BY s.name
         ORDER BY s.spotify_added_at DESC;
       ''').fetchall()
-    conn.commit()
+    conn.close()
+    return result
+
+
+def search_library(song=None, album=None, artist=None):
+    conn = sqlite3.connect(os.getenv('DB_PATH'))
+    c = conn.cursor()
+    query = """
+
+        SELECT
+          s.spotify_added_at as added_at,
+          s.name AS song,
+          al.name as album,
+          GROUP_CONCAT(a.name, ', ') AS artist
+        FROM song AS s
+          JOIN album AS al
+            ON s.album_id = al.id
+          LEFT JOIN song_artist AS sa
+            ON sa.song_id = s.id
+          LEFT JOIN artist AS a
+            ON a.id = sa.artist_id
+        WHERE
+          (?1 IS NULL OR s.name LIKE ?1 || '%')
+          AND
+          (?2 IS NULL OR al.name LIKE ?2 || '%')
+        GROUP BY s.name
+        HAVING (?3 IS NULL or artist LIKE ?3 || '%')
+    """
+    result = c.execute(query, (song, album, artist)).fetchall()
     conn.close()
     return result
 
