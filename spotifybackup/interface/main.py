@@ -52,6 +52,7 @@ class MainApplication(tk.Frame):
 
         self.show_frame("LibraryTable")
         self.active_frame_name = 'LibraryTable'
+
     def show_frame(self, page_name):
         self.active_frame_name = page_name
         frame = self.frames[page_name]
