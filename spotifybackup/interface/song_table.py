@@ -44,6 +44,10 @@ class SongTable(tk.Frame):
         # rearrange items in sorted positions
         for index, (val, k) in enumerate(l):
             tv.move(k, '', index)
+            if index % 2 == 0:
+                tv.item(k, tags=('even',))
+            else:
+                tv.item(k, tags=('odd',))
 
         # reverse sort next time
         tv.heading(col, command=lambda: self.treeview_sort_column(tv, col, not reverse))

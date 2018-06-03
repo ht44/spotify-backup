@@ -6,9 +6,8 @@ import sys, os
 from spotifybackup.database.album import search_albums
 from spotifybackup.database.artist import search_artists
 from spotifybackup.database.song import search_songs
-
-sys.path.insert(0, os.path.abspath('../../'))
 from spotifybackup.database.library import search_all
+
 
 class Submenu(tk.Frame):
     def __init__(self, parent, controller, **kw):
