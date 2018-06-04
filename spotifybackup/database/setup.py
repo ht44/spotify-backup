@@ -31,12 +31,12 @@ def setup():
 
     c.execute('''
         CREATE TABLE IF NOT EXISTS song_artist (
-          id INTEGER PRIMARY KEY,
           song_id INTEGER NOT NULL,
           artist_id INTEGER NOT NULL,
+          PRIMARY KEY (song_id, artist_id),
           FOREIGN KEY(song_id) REFERENCES song(id),
           FOREIGN KEY(artist_id) REFERENCES artist(id)
-        );''')
+        ) WITHOUT ROWID;''')
 
     c.execute('''
         CREATE TABLE IF NOT EXISTS album_artist (
@@ -45,6 +45,12 @@ def setup():
           artist_id INTEGER NOT NULL,
           FOREIGN KEY(album_id) REFERENCES album(id),
           FOREIGN KEY(artist_id) REFERENCES artist(id)
+        );''')
+
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS backup (
+          id INTEGER PRIMARY KEY,
+          timestamp TEXT NOT NULL
         );''')
 
     conn.commit()

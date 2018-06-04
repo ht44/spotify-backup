@@ -55,7 +55,6 @@ def fetch_library():
 
     result = [SpotifyTrack(t) for t in result]
     lib = SpotifyLibrary(result)
-    pprint(lib.songs)
     library.insert(
         lib.songs_tuple,
         lib.unique_albums_tuple,

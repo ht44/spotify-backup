@@ -85,7 +85,6 @@ def search_all(search=None):
     return result
 
 
-
 def insert(song_tuples, album_tuples, artist_tuples, song_artist_tuples):
     conn = sqlite3.connect(os.getenv('DB_PATH'))
     c = conn.cursor()
@@ -110,7 +109,7 @@ def insert(song_tuples, album_tuples, artist_tuples, song_artist_tuples):
         VALUES (
           (SELECT id from song where ? = song.spotify_id),
           (SELECT id from artist where ? = artist.spotify_id)
-          )
+        )
         ''', song_artist_tuples)
     conn.commit()
     conn.close()

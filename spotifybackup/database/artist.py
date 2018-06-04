@@ -5,7 +5,7 @@ import sqlite3
 def get_artists():
     conn = sqlite3.connect(os.getenv('DB_PATH'))
     c = conn.cursor()
-    result = c.execute('''SELECT * FROM artist''').fetchall()
+    result = c.execute('''SELECT spotify_id, name FROM artist''').fetchall()
     conn.commit()
     conn.close()
     return result
@@ -16,6 +16,14 @@ def get_artist(artist_id):
     c = conn.cursor()
     t = (artist_id,)
     result = c.execute('SELECT * FROM artist WHERE id=?', t).fetchone()
+    conn.close()
+    return result
+
+
+def count_artists():
+    conn = sqlite3.connect(os.getenv('DB_PATH'))
+    c = conn.cursor()
+    result = c.execute('SELECT COUNT(*) FROM artist').fetchone()
     conn.close()
     return result
 

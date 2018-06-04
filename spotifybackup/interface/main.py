@@ -1,6 +1,7 @@
 import tkinter as tk
 from spotifybackup.interface.album_table import AlbumTable
 from spotifybackup.interface.artist_table import ArtistTable
+from spotifybackup.interface.notebook import Notebook
 from spotifybackup.interface.song_table import SongTable
 from spotifybackup.interface.library_table import LibraryTable
 from spotifybackup.interface.sidebar import Sidebar
@@ -31,27 +32,33 @@ class MainApplication(tk.Frame):
 
         main_frame = tk.Frame(center, bg='grey', width=250, height=300, padx=3, pady=3)
 
-        sidebar_frame = tk.Frame(center, bg='#032625', width=300, height=300)
-
-        self.sidebar = Sidebar(parent=sidebar_frame, controller=self)
-        self.submenu = Submenu(parent=top_frame, controller=self)
+        sidebar_frame = tk.Frame(center, bg='#032625', width=200, height=300)
 
         sidebar_frame.grid(row=0, column=0, sticky="ns")
         main_frame.grid(row=0, column=1, sticky="nsew")
+
+        self.notebook = Notebook(main_frame)
+        self.submenu = Submenu(parent=top_frame, controller=self)
+        self.sidebar = Sidebar(parent=sidebar_frame, controller=self)
+
+
         # ctr_right.grid(row=0, column=2, sticky="ns")
 
-        self.frames = {}
-        for F in (LibraryTable, ArtistTable, AlbumTable, SongTable):
-            page_name = F.__name__
-            frame = F(parent=main_frame, controller=self)
-            self.frames[page_name] = frame
-            # put all of the pages in the same location;
-            # the one on the top of the stacking order
-            # will be the one that is visible.
-            frame.grid(row=0, column=0, sticky="nsew")
+        # self.frames = {}
+        # for F in (LibraryTable, ArtistTable, AlbumTable, SongTable):
+        #     page_name = F.__name__
+        #     frame = F(parent=main_frame, controller=self)
+        #     self.frames[page_name] = frame
+        #     # put all of the pages in the same location;
+        #     # the one on the top of the stacking order
+        #     # will be the one that is visible.
+        #     frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame("LibraryTable")
-        self.active_frame_name = 'LibraryTable'
+        # self.show_frame("LibraryTable")
+        # self.active_frame_name = 'LibraryTable'
+
+
+        # hayden.pack(side='left', expand=True)
 
     def show_frame(self, page_name):
         self.active_frame_name = page_name

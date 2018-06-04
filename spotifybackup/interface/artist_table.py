@@ -58,7 +58,7 @@ class ArtistTable(tk.Frame):
             else:
                 rowmod = 'odd'
             self.treeview.insert(
-                '', 'end', text=r[0], values=(r[1][1], r[1][2]), tags=(rowmod,))
+                '', 'end', text=r[0], values=(r[1][0], r[1][1]), tags=(rowmod,))
 
     def reload_table(self, records):
         self.treeview.delete(*self.treeview.get_children())
