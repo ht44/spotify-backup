@@ -53,25 +53,25 @@ class Sidebar(tk.Frame):
         backup_button.pack(side='top')
 
     def backup(self):
-        fetch_library()
-        insert_backup()
-        library = get_library()
-        songs = get_songs()
-        albums = get_albums()
-        artists = get_artists()
-        song_count = count_songs()
-        album_count = count_albums()
-        artist_count = count_artists()
+        # fetch_library()
+        # insert_backup()
+        # library = get_library()
+        # songs = get_songs()
+        # albums = get_albums()
+        # artists = get_artists()
+        # song_count = count_songs()
+        # album_count = count_albums()
+        # artist_count = count_artists()
         last_backup = get_last_backup()
 
-        self.controller.submenu.song_count_label['text'] = 'Songs: ' + str(song_count[0])
-        self.controller.submenu.album_count_label['text'] = 'Albums: ' + str(album_count[0])
-        self.controller.submenu.artist_count_label['text'] = 'Artists: ' + str(artist_count[0])
-        self.controller.submenu.last_backup_label['text'] = 'Last Backup: ' + str(last_backup[0])
-        self.controller.notebook.library.reload_table(library)
-        self.controller.notebook.songs.reload_table(songs)
-        self.controller.notebook.albums.reload_table(albums)
-        self.controller.notebook.artists.reload_table(artists)
+        # self.controller.submenu.song_count_label['text'] = 'Songs: ' + str(song_count[0])
+        # self.controller.submenu.album_count_label['text'] = 'Albums: ' + str(album_count[0])
+        # self.controller.submenu.artist_count_label['text'] = 'Artists: ' + str(artist_count[0])
+        # self.controller.notebook.library.reload_table(library)
+        # self.controller.notebook.songs.reload_table(songs)
+        # self.controller.notebook.albums.reload_table(albums)
+        # self.controller.notebook.artists.reload_table(artists)
+        self.controller.submenu.marquee.text = 'weee'
 
     @staticmethod
     def refresh():
